@@ -44,11 +44,6 @@ class Packages(models.Model):
 
 
 
-class Reviews(models.Model):
-    rating=models.IntegerField()
-    text=models.TextField()
-
-
 
 class Requests(models.Model):
     status=models.CharField(max_length=450)
@@ -103,12 +98,22 @@ class Gigs(models.Model):
     Startingprice=models.IntegerField(default=300)
     teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE,default=1)
     subject=models.ForeignKey(Subjects, on_delete=models.CASCADE,default=1)
-    review=models.ManyToManyField(Reviews)
+    # review=models.ManyToManyField(Reviews)
     
+class Reviews(models.Model):
+    rating=models.IntegerField()
+    text=models.TextField()
+    gig = models.ForeignKey(Gigs, on_delete=models.CASCADE,default=1)
+
+
+class GigRating(models.Model):
+    gig = models.ForeignKey(Gigs, on_delete=models.CASCADE)
+    rating=models.IntegerField()
+
 
 class GigPackages(models.Model):
     gig=models.ManyToManyField(Gigs)
-    package=models.ManyToManyField(Packages)
+    package=models.ForeignKey(Packages,on_delete=models.CASCADE,default=1)
 
     # def __bytes__  (self):
     #     return self.image
