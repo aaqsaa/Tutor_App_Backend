@@ -1,39 +1,26 @@
 from email.mime import image
+from pyexpat import model
 from rest_framework import serializers
-from .models import Gigs
+from .models import GigRating, Gigs,Orders
 
-# class BinaryField(serializers.Field):
-#     image=serializers.CharField()
-#     print("image in serialzier::: ",image)
 
-#     def to_representation(self, value):
-#         print("vaaaaalllluuuueeee: ",value)
-#         return value.decode('utf-8')
-
-    # def to_internal_value(self, value):
-    #     return value.encode('utf-8')
 
 class GigsSerializer(serializers.ModelSerializer):
     print("I am in serializer")
 
     class Meta:
         model=Gigs
-        fields=('gig_id','name','desc','Startingprice')
+        fields=('gig_id','name','desc','Startingprice','teacher')
 
-        # Gigs.image=serializers.CharField()
-        # print("image in serialzier:::kjfhskujhfukhfukdshfuhfudshfushgfudsghuoaguoagbvufgbodfh ")
+class RatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=GigRating
+        feilds='rating'
 
-        # print("image in serialzier::: ",Gigs.image)
-        # gig=Gigs.objects.all()
-        # print("zainabbbbbbbbbbbbbbbbbbbbbbb:::::",gig.image.decode("UTF-8"))
-
-        # image=serializers.CharField()
-        # print("image in serialzier::: ",image)
-        
-
-        # fields= '__all__'
-    # image = BinaryField()
-
+class OrdersSerializer(serializers.Serializer):
+    class Meta:
+        model=Orders
+        fields='__all__'
 
 # class DemoSerializer(serializers.ModelSerializer):
 #     class Meta:
