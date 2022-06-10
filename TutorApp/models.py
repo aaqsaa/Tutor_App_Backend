@@ -21,6 +21,7 @@ class Teachers(models.Model):
     CNIC=models.CharField(max_length=15)
     DOB=models.DateField()
     badge=models.BooleanField(default=False)
+    desc=models.TextField(default="No description")
     image=models.BinaryField (blank = True, null = True, editable = True)
 
 
@@ -37,6 +38,8 @@ class Students(models.Model):
     fullname=models.CharField(max_length=400)
     CNIC=models.CharField(max_length=15)
     DOB=models.DateField()
+    image=models.BinaryField (blank = True, null = True, editable = True)
+
 
 class Packages(models.Model):
     name=models.CharField(max_length=200)
@@ -120,6 +123,13 @@ class GigPackages(models.Model):
     gig=models.ManyToManyField(Gigs)
     package=models.ForeignKey(Packages,on_delete=models.CASCADE,default=1)
 
+class OrderRequest(models.Model):
+    description=models.CharField(max_length=200)
+    price=models.IntegerField()
+    date=models.DateTimeField(auto_now_add=True)
+    files=models.BinaryField (blank = True, null = True, editable = True)
+    teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE)
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
     # def __bytes__  (self):
     #     return self.image
 class demo(models.Model):
