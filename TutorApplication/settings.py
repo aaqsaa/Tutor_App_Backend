@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     #my_apps
     'TutorApp',
     'rest_framework',
@@ -54,7 +55,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_WHITELIST = (
+  'http://localhost:8000',
+)
 
 ROOT_URLCONF = 'TutorApplication.urls'
 
@@ -84,9 +91,9 @@ WSGI_APPLICATION = 'TutorApplication.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'TutorAppdb',
-        'USER': 'zainab',
-        'PASSWORD': 'Password123#@!',
+        'NAME': 'Tutor_App_db',
+        'USER': 'root',
+        'PASSWORD': 'faiezgotit1',
         'HOST': 'localhost',
         'PORT': '3306',
     }

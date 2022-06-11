@@ -1,6 +1,7 @@
 from email.mime import image
 from rest_framework import serializers
 from .models import Gigs
+from .models import CodeEditor
 
 # class BinaryField(serializers.Field):
 #     image=serializers.CharField()
@@ -39,3 +40,9 @@ class GigsSerializer(serializers.ModelSerializer):
 #     class Meta:
 #         model=demo
 #         fields='__all__'
+
+class CodeEditorSerializer(serializers.ModelSerializer):
+    print("I'm in code editor serializer")
+    class Meta:
+        model=CodeEditor
+        fields='__all__'
