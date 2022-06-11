@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import  ReviewSerializer, PackageSerializer,StudentOrderSerializer, OrderRequestSerializer, GigsSerializer
+from .serializers import  ReviewSerializer, PackageSerializer,StudentOrderSerializer, OrderRequestSerializer, GigsSerializer,TeachersSerializer,TeacherOrderSerializer
 from .models import Gigs,GigRating, Orders,Teachers,OrderRequest,Reviews, GigPackages
 import base64
 from PIL import Image
@@ -183,7 +183,7 @@ def Order(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#--- get specified record---
+#--- get specified record of Student---
 @api_view(['GET'])
 def order_details(request,student_id):
     if request.method=='GET':
@@ -195,7 +195,18 @@ def order_details(request,student_id):
         print("specific reviews are---",serializer.data)
         return Response(serializer.data)
 
+#--- get specified record of Teacher---
 
+@api_view(['GET'])
+def teacher_order_details(request,teacher_id):
+    if request.method=='GET':
+        try:
+            order=Orders.objects.filter(teacher=teacher_id)
+        except Orders.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer=TeacherOrderSerializer(order,many=True)
+        print("specific reviews are---",serializer.data)
+        return Response(serializer.data)
 
 # ---delete record---
 @api_view(['DELETE'])

@@ -26,6 +26,12 @@ class StudentOrderSerializer(serializers.ModelSerializer):
         model=Orders
         fields='__all__'
 
+class TeacherOrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Orders
+        fields='__all__'
+
+
 class OrderRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model=OrderRequest
