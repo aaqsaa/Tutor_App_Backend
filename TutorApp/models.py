@@ -74,8 +74,6 @@ class Tuition(models.Model):
 class CodeEditor(models.Model):
     language=models.CharField(max_length=200)
     timestamp=models.DateTimeField(auto_now_add=True)
-    teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE)
-    student = models.ForeignKey(Students, on_delete=models.CASCADE)
 
 class DemoTests(models.Model):
     name=models.CharField(max_length=400)

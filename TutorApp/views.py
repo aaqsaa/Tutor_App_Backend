@@ -29,31 +29,6 @@ def CodeEditorView(request):
             return Response(status=status.HTTP_201_CREATED)
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
-@api_view(['GET','POST'])
-def Compiler(request):
-    print('in compiler')
-    if request.method=='GET':
-        
-        return Response(status=status.HTTP_201_CREATED)
-    if request.method=='POST':
-        print('in Compiler API')
-        code =  request.data.code
-        language=request.data.language
-        input1=request.data.input
-        data = {
-        "code": code,
-        "language": language,
-        "input": input1
-        }
-        config = {
-            method: 'post',
-            url: 'https://codexweb.netlify.app/.netlify/functions/enforceCode',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data: data
-        }
-        
 
 
 def front(request):
