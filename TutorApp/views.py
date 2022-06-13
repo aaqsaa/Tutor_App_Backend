@@ -237,7 +237,16 @@ def request_details(request,student_id):
         print("specific reviews are---",serializer.data)
         return Response(serializer.data)
 
-
+@api_view(['GET'])
+def request_teacher_details(request,teacher_id):
+    if request.method=='GET':
+        try:
+            request=OrderRequest.objects.filter(teacher_id=teacher_id)
+        except Orders.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        serializer=OrderRequestSerializer(request,many=True)
+        print("specific reviews are---",serializer.data)
+        return Response(serializer.data)
 
 # ---delete record---
 @api_view(['DELETE'])

@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include,path
-from TutorApp.views import Package,Gig,Teacher, Review_delete, Review_details,front,Review,Package_details,Package_delete, Order, order_details, order_delete,Request,request_delete,request_details,Gig_detail
+from TutorApp.views import Package,Gig,Teacher, Review_delete, Review_details,front,Review,Package_details,Package_delete, Order, order_details, order_delete,Request,request_delete,request_details,Gig_detail,request_teacher_details
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path("", front, name="front"),
     path("Gigs/",Gig,name="Gigs"),
     path("Teachers/<int:id>/",Teacher,name="Teacher"),
     path("Gigs/<int:pk>/",Gig_detail,name="Gig_detail"),
-     path('Reviews/',Review, name="Review"),
+    path('Reviews/',Review, name="Review"),
     path("Review_details/<int:gig_id>/",Review_details,name="Review_details"),
     path("Review_delete/<int:pk>/",Review_delete,name="Review_delete"),
     path('Packages/',Package, name="Package"),
@@ -34,5 +34,6 @@ urlpatterns = [
     path('Request/',Request, name="Request"),
     path("request_details/<int:student_id>/",request_details,name="request_details"),
     path("request_delete/<int:pk>/",request_delete,name="request_delete"),
+    path("request_teacher_details/<int:teacher_id>/",request_teacher_details,name="request_teacher_details"),
   
 ]
