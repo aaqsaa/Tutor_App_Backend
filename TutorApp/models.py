@@ -42,7 +42,14 @@ class Packages(models.Model):
     type=models.CharField(max_length=200)
     price=models.IntegerField()
 
-
+class OrderRequest(models.Model):
+    description=models.CharField(max_length=200)
+    price=models.IntegerField()
+    date=models.DateTimeField(auto_now_add=True)
+    files=models.BinaryField (blank = True, null = True, editable = True)
+    teacher = models.ForeignKey(Teachers, on_delete=models.CASCADE)
+    student = models.ForeignKey(Students, on_delete=models.CASCADE)
+    status= models.CharField(max_length=100,default="PENDING")
 
 
 class Requests(models.Model):
