@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include,path
-from TutorApp.views import front,CodeEditorView,request_teacher_order_details
+from TutorApp.views import front,CodeEditorView,request_teacher_order_details,order_status_change
 
 
 urlpatterns = [
@@ -23,5 +23,6 @@ urlpatterns = [
     path("", front, name="front"),
     path('CodeEditor/',CodeEditorView,name="CodeEditorView"),
     path("request_teacher_details/<int:teacher_id>/",request_teacher_order_details,name="request_teacher_order_details"),
-  
+    path("order_status_change/<int:order_id>",order_status_change,name="order_status_change"),
+    
 ]

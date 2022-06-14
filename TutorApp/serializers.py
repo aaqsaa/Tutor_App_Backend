@@ -52,3 +52,8 @@ class OrderRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model=OrderRequest
         fields='__all__'
+
+class OrderStatusChangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=OrderRequest
+        fields=['status']

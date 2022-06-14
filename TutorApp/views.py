@@ -4,7 +4,7 @@ from django.http import HttpResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from .serializers import CodeEditorSerializer,OrderRequestSerializer
+from .serializers import CodeEditorSerializer,OrderRequestSerializer,OrderStatusChangeSerializer
 from .models import CodeEditor,OrderRequest
 
 
@@ -30,7 +30,7 @@ def CodeEditorView(request):
         return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
+@api_view(['GET','PUT'])
 def request_teacher_order_details(request,teacher_id):
     if request.method=='GET':
         try:
@@ -43,19 +43,31 @@ def request_teacher_order_details(request,teacher_id):
             data={}
             print("student name: ",x.student.fullname)
             print("student price: ",x.price)
-
             data["name"]=x.student.fullname
             data["id"]=x.id
             data["description"]=x.description
             data["price"]=x.price
-            data["data"]=x.price
             data["files"]=x.files
             data["date"]=x.date
             data["status"]=x.status
+            data["teacher_id"]=x.teacher_id
+            data["student_id"]=x.student_id
             listData.append(data)
         print("specific reviews are---",serializer.data)
         print("List Data: ",listData)
         return Response(listData)
+
+
+@api_view(['GET','PUT'])
+def order_status_change(request,order_id):
+    if request.method=='PUT':
+        requested=OrderRequest.objects.get(id=order_id)
+        serializer = OrderStatusChangeSerializer(requested,data=request.data) 
+        print("The Requested Data is: ",request.data)
+        if serializer.is_valid(): 
+            serializer.save() 
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
 
 def front(request):
